@@ -42,7 +42,7 @@ from MCForecastTools import MCSimulation
 
 1. **Values of crypotcurrency holdings are pulled into a Jupyter Notebook using an API call to Free Crypto API, then the requests and Json libraries are used to translate the data to a dictionary, which is sliced to find the price data for analysis.**
     
-![code image api_call](./images/request_library.png)
+![code image api_call](./Images/request_library.png)
 
     - slicing the response object to access the current prices of BTC and ETH
 
@@ -89,15 +89,15 @@ spy_close_price = portfolio_df.loc[start_date, ("SPY", "close")].astype(float)
     -finally the latest closing price for the holdings was multiplied by the number of shares held, then added together to find the total value of the stocks and bonds portfolio, with the total printed out for the customer.
 **`total_portfolio = total_crypto_wallet + total_stocks_bonds`**
 
-`print(f"The current value of your cryptocurrency wallet is ${total_crypto_wallet: .2f}")`
+`print(f"The current portfolio balance is ${total_portfolio: .2f}")`
 
 ## Evaluating Financial Health: Data Analysis for establishing an Emergency Fund
 
 1. **The total financial holdings established above were manipulated and reframed into a new dataframe using Pandas, and then visualized into a pie graph.**
 
-![wallet_total_df](./images/wallet_df.png)
+![wallet_total_df](./Images/wallet_df.png)
 
-![portfolio_pie](./images/portfolio_pie.png)
+![portfolio_pie](./Images/portfolio_pie.png)
 
 2. **Python code was used to mathmatically determine if the customer's portfolio value and stated monthly income is enough to allow for the establishment of an Emergency Fund. The results were filtered with 3 conditions to give the customer a response stating their financial health.**
 
@@ -134,23 +134,23 @@ prices_df = alpaca.get_bars(tickers, timeframe, start=start_date, end=end_date).
 `MC_30yr = MCSimulation(portfolio_data = prices_df, weights = [.60,.40], num_simulation = 500, num_trading_days = 252*30)`
 
     
-    - The cumulative returns were calculated in the Simulation and plotted
+   - The cumulative returns were calculated in the Simulation and plotted
     
    `MC_30yr.calc_cumulative_return()`
    
    `MC_sim_line_plot = MC_30yr.plot_simulation()`
 
-![Monte_Carlo_plot](./images/MC_plot.png) 
+![Monte_Carlo_plot](./Images/MC_plot.png) 
 
-    - The probablility distribution was calculated in the Simulation and plotted
+   - The probablility distribution was calculated in the Simulation and plotted
     
-    `MC_sim_dist_plot = MC_30yr.plot_distribution()`
+   `MC_sim_dist_plot = MC_30yr.plot_distribution()`
 
-![distribution_plot](./images/MC_distr_plot.png)
+![distribution_plot](./Images/MC_distr_plot.png)
 
-    - Finally, the 30 year simulation cumulative return totals were summarized for general statistics which were used to find the dollar value of 95% confidnece interval for future returns
+   - Finally, the 30 year simulation cumulative return totals were summarized for general statistics which were used to find the dollar value of 95% confidnece interval for future returns
 
-![MC_30yr_summary_stats](./images/30_sum_stats.png)
+![MC_30yr_summary_stats](./Images/30_sum_stats.png)
 
 # Use the lower and upper `95%` confidence intervals to calculate the range of the possible outcomes for the current stock/bond portfolio
 `ci_lower_thirty_cumulative_return = MC_30yr_summary_stats[8] * total_stocks_bonds`
@@ -166,9 +166,9 @@ prices_df = alpaca.get_bars(tickers, timeframe, start=start_date, end=end_date).
     
     `MC_10yr = MCSimulation(portfolio_data = prices_df, weights = [.80,.20], num_simulation = 500, num_trading_days = 252*10)`
     
-    - All calculations and plots were repeated to end with the simulation's cumulative return totals summarized into general statistics then used to find the dollar value of 95% confidnece interval for future returns
+   - All calculations and plots were repeated to end with the simulation's cumulative return totals summarized into general statistics then used to find the dollar value of 95% confidnece interval for future returns
     
-![MC_10yr_summary_stats](./images/10_sum_stats.png)
+![MC_10yr_summary_stats](./Images/10_sum_stats.png)
 
 # Use the lower and upper `95%` confidence intervals to calculate the range of the possible outcomes for the current stock/bond portfolio
 `ci_lower_ten_cumulative_return = MC_10yr_summary_stats[8] * total_stocks_bonds`
